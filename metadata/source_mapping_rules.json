@@ -1,0 +1,53 @@
+{
+  "template_id": "distributed-training-resume",
+  "positive_signals": [
+    "training",
+    "checkpoint",
+    "resume",
+    "torch",
+    "pytorch",
+    "accelerate",
+    "lightning",
+    "preemption",
+    "spot instance",
+    "fine-tuning",
+    "optimizer",
+    "scheduler",
+    "rng",
+    "distributed training",
+    "model training",
+    "s3 checkpoint",
+    "ml platform"
+  ],
+  "negative_signals": [
+    "pure frontend only",
+    "no training path",
+    "inference-only api"
+  ],
+  "stack_matches": [
+    "python",
+    "pytorch",
+    "torch",
+    "postgres",
+    "s3",
+    "minio",
+    "mlflow",
+    "accelerate",
+    "lightning"
+  ],
+  "best_roles": [
+    "ML Infra Engineer",
+    "Research Engineer",
+    "Platform Engineer",
+    "Staff Backend"
+  ],
+  "personalization_knobs": [
+    "model family",
+    "checkpoint cadence",
+    "preemption reason",
+    "run metadata schema",
+    "storage naming",
+    "resume tolerance",
+    "report format"
+  ]
+}

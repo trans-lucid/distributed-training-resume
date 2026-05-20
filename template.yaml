@@ -1,0 +1,71 @@
+id: distributed-training-resume
+title: Distributed Training Resume
+area: ml-infra
+language: python
+roles:
+  - ML Infra Engineer
+  - Research Engineer
+  - Platform Engineer
+  - Staff Backend
+seniority:
+  - senior
+  - staff
+time_minutes:
+  medium: 75
+  hard: 100
+  staff: 120
+local_environment:
+  required:
+    - docker
+    - docker-compose
+  public_services:
+    - name: minio
+      purpose: S3-compatible checkpoint object storage
+    - name: postgres
+      purpose: run metadata, checkpoints, and validation history
+  hidden_services:
+    - name: docker-compose.evaluator
+      purpose: stricter checkpoint and resume fixtures
+  no_external_credentials: true
+  no_cloud_calls: true
+evaluation_axes:
+  - checkpoint completeness
+  - optimizer state recovery
+  - RNG and scheduler continuity
+  - run metadata validation
+  - corrupt checkpoint handling
+  - report quality
+source_signals:
+  - training
+  - checkpoint
+  - resume
+  - torch
+  - pytorch
+  - accelerate
+  - lightning
+  - preemption
+  - spot instance
+  - model
+  - optimizer
+  - scheduler
+  - rng
+  - fine-tuning
+candidate_expected_failure:
+  - optimizer_state_missing
+  - rng_state_missing
+  - resume_diverged
+  - corrupt_checkpoint_unhandled
+hidden_test_strategy:
+  - corrupt latest checkpoint falls back to prior valid checkpoint
+  - changed batch size fails run metadata validation
+  - RNG state preserves sample order
+  - optimizer state preserves loss curve
+  - repeated resume command is idempotent
+  - report separates recoverable and unrecoverable issues
+forbidden:
+  - one-file-helper
+  - model-weights-only
+  - hardcoded-loss-curve
+  - bypass-minio
+  - bypass-postgres
+  - ignore-config-hash

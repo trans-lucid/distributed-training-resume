@@ -1,0 +1,6 @@
+{
+  "crash_at_step": 5,
+  "resume_to_step": 10,
+  "preemption_reason": "spot_interruption",
+  "expected_recoverable": true
+}

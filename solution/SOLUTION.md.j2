@@ -1,0 +1,13 @@
+# Solution Notes
+
+The reference implementation treats a resumable checkpoint as complete training state, not just model weights.
+
+Key fixes:
+
+- Checkpoints include model, optimizer, scheduler, RNG, step, loss, run id, and config hash.
+- Resume validates run metadata before restoring state.
+- Corrupt latest checkpoints are skipped in favor of the newest prior valid checkpoint.
+- Split resume is compared against an uninterrupted deterministic baseline.
+- Recovery reports separate recoverable checkpoint issues from unrecoverable run-configuration mismatches.
+
+The intended fix surface is `checkpoint.py`, `resume.py`, `validation.py`, `train.py`, and `report.py`. Bypassing MinIO/Postgres should fail the Docker-backed gate.

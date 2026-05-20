@@ -1,0 +1,19 @@
+public:
+  seed: 20260520
+  run_id: public-run
+  steps: 10
+  crash_step: 5
+  expected_failures:
+    - optimizer_state_missing
+    - rng_state_missing
+    - resume_diverged
+    - corrupt_checkpoint_unhandled
+hidden:
+  seed: 20260521
+  traps:
+    - corrupt_latest_checkpoint
+    - changed_batch_size
+    - rng_sample_order
+    - optimizer_loss_curve
+    - repeated_resume_idempotency
+    - report_issue_classification

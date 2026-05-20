@@ -1,0 +1,8 @@
+run_id: public-run
+seed: 1337
+steps: 10
+crash_step: 5
+learning_rate: 0.08
+batch_size: 3
+checkpoint_every: 5
+bucket: checkpoints
