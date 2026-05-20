@@ -12,3 +12,12 @@
 | 8 | session-lifecycle-reconciler | golden | SaaS auth/session drift | Keycloak-like simulator, Postgres, Redis | passed in prior repo | passed in prior repo | Auth/session template |
 | 9 | tenant-permission-audit | golden | enterprise SaaS authorization | Postgres, OPA | passed in prior repo | passed in prior repo | Security/authorization template |
 | 10 | distributed-training-resume | golden | ML infra checkpoint recovery | MinIO, Postgres, CPU PyTorch | passed | passed | Remote CI and Docker-backed expected failure passed |
+## Machine-Readable Contract Migration
+
+- machine_readable_manifest: present
+- root_make_aliases: present
+- render_context_support: present
+- check_render_contract: present
+- scan_safety_uses_manifest: present
+- remote_ci_manifest_validation: pending
+
