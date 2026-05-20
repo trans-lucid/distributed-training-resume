@@ -11,4 +11,4 @@
 | 7 | workflow-recovery-reconciler | golden | durable workflow recovery | Postgres, WireMock, LocalStack SQS | passed in prior repo | passed in prior repo | Platform recovery template |
 | 8 | session-lifecycle-reconciler | golden | SaaS auth/session drift | Keycloak-like simulator, Postgres, Redis | passed in prior repo | passed in prior repo | Auth/session template |
 | 9 | tenant-permission-audit | golden | enterprise SaaS authorization | Postgres, OPA | passed in prior repo | passed in prior repo | Security/authorization template |
-| 10 | distributed-training-resume | in progress | ML infra checkpoint recovery | MinIO, Postgres, CPU PyTorch | pending | pending | Current template |
+| 10 | distributed-training-resume | golden | ML infra checkpoint recovery | MinIO, Postgres, CPU PyTorch | passed | passed | Remote CI and Docker-backed expected failure passed |
