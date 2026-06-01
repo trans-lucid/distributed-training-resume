@@ -2,6 +2,10 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cleanup_generated_transients() {
+  find "$ROOT/generated" -type d \( -name __pycache__ -o -name .pytest_cache -o -name "*.egg-info" \) -prune -exec rm -rf {} +
+}
+trap cleanup_generated_transients EXIT
 
 cd "$ROOT/generated/main"
 python3 -m pip install -e ".[test]" >/tmp/distributed-render-main-install.txt

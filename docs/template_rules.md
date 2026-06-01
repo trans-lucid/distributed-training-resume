@@ -432,6 +432,7 @@ The manifest must include:
 - forbidden candidate-main paths
 - whether Docker Compose is required
 - `forbid_manual_restructure: true`
+- `personalization_contract` with declared difficulty levels, focus axes, safe scenario knobs, generator commands, candidate-forbidden markers, and private solution cue requirements
 
 ## No Manual Restructure Rule
 
@@ -443,3 +444,15 @@ template render -> generated/main -> generated/solution.
 
 Manual repair is only allowed if a template validation command fails and the exact blocker is recorded.
 
+## Difficulty-Tunable Factory Rule
+
+Challenge creation agents must personalize templates through `template_context.json`, declared manifest knobs, and generator commands.
+
+The renderer may vary candidate-safe prose, public fixture/config artifacts, and private solution notes. It must not expose recruiter source profiles, raw personalized context blocks, hidden-test strategy, evaluator details, solution hints, customer paths, or secrets in `generated/main`.
+
+Personalization validation must prove that:
+
+- the manifest declares `junior`, `senior`, and `staff`
+- the selected focus and difficulty appear only in safe candidate-facing files
+- generated non-doc artifacts change across profiles
+- `generated/solution` includes private reviewer cues for focus, expected failure classes, hidden test intent, scoring rubric, and debrief answer cues

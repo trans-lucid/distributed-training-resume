@@ -25,4 +25,4 @@ make run
 make clean
 ```
 
-Private tests use harder corrupt checkpoint, config mismatch, RNG continuity, repeated resume, and report classification cases. Do not hardcode fixture outputs or bypass MinIO/Postgres.
+Final validation includes harder corrupt-checkpoint, config-mismatch, RNG-continuity, repeated-resume, and report-classification cases. Do not hardcode fixture outputs or bypass MinIO/Postgres.

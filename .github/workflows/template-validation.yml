@@ -37,11 +37,23 @@ jobs:
       - name: Check render contract
         run: make check-render
 
+      - name: Check published repo contract
+        run: make PYTHON=python check-published-repo
+
       - name: Safety scan
         run: make PYTHON=python scan-safety
 
+      - name: Validate personalization factory
+        run: make PYTHON=python validate-personalization
+
+      - name: Check personalized published repo contract
+        run: make PYTHON=python check-published-repo-after-personalization
+
       - name: Rendered repo smoke
         run: make PYTHON=python validate-rendered-smoke
+
+      - name: Check smoke published repo contract
+        run: make PYTHON=python check-published-repo-after-smoke
 
       - name: Docker-backed integration expected failure
         run: make PYTHON=python validate-docker-integration

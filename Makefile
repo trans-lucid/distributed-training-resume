@@ -1,6 +1,6 @@
 PYTHON ?= python3
 
-.PHONY: check-render install validate-solution validate-candidate-main-expected-failure validate-docker-integration validate-rendered-smoke render scan-safety validate clean
+.PHONY: check-render check-published-repo check-published-repo-after-personalization check-published-repo-after-smoke install validate-solution validate-candidate-main-expected-failure validate-docker-integration validate-personalization validate-rendered-smoke render scan-safety validate clean
 
 install:
 	$(PYTHON) -m pip install --upgrade pip
@@ -15,7 +15,9 @@ validate-candidate-main-expected-failure: install
 validate-docker-integration: install
 	bash tools/expect_candidate_docker_failure.sh
 
-validate-rendered-smoke: render scan-safety
+validate-rendered-smoke:
+	$(PYTHON) tools/render_template.py
+	$(PYTHON) tools/scan_safety.py
 	bash tools/validate_rendered_smoke.sh
 
 render:
@@ -27,7 +29,19 @@ scan-safety:
 check-render:
 	$(PYTHON) tools/check_render_contract.py
 
-validate: validate-solution validate-candidate-main-expected-failure render check-render scan-safety validate-rendered-smoke validate-docker-integration
+check-published-repo:
+	$(PYTHON) tools/check_published_repo_contract.py --candidate-dir generated/main --solution-dir generated/solution --manifest translucid-template.json
+
+check-published-repo-after-personalization:
+	$(PYTHON) tools/check_published_repo_contract.py --candidate-dir generated/main --solution-dir generated/solution --manifest translucid-template.json
+
+check-published-repo-after-smoke:
+	$(PYTHON) tools/check_published_repo_contract.py --candidate-dir generated/main --solution-dir generated/solution --manifest translucid-template.json
+
+validate-personalization:
+	$(PYTHON) tools/validate_personalization.py
+
+validate: validate-solution validate-candidate-main-expected-failure render check-render check-published-repo scan-safety validate-personalization check-published-repo-after-personalization validate-rendered-smoke check-published-repo-after-smoke validate-docker-integration
 
 clean:
 	rm -rf generated

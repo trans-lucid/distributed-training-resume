@@ -26,6 +26,14 @@ DEFAULT_FORBIDDEN = [
     "source-dossiers/",
     "template.yaml",
     "metadata/",
+    ".env",
+    ".env.local",
+    "__pycache__/",
+    ".pytest_cache/",
+    "*.egg-info",
+    "node_modules/",
+    "coverage/",
+    "dist/",
 ]
 
 SECRET_PATTERNS = [
@@ -50,19 +58,31 @@ def fail(messages: list[str]) -> None:
 
 
 def forbidden_paths() -> list[str]:
+    baseline = [
+        ".env",
+        ".env.local",
+        "__pycache__/",
+        ".pytest_cache/",
+        "*.egg-info",
+        "node_modules/",
+        "coverage/",
+        "dist/",
+    ]
     if MANIFEST.exists():
         data = json.loads(MANIFEST.read_text())
         configured = data.get("candidate_main_forbidden_paths")
         if isinstance(configured, list) and configured:
-            return [str(item) for item in configured]
+            return [str(item) for item in configured] + baseline
     return DEFAULT_FORBIDDEN
 
 
 def is_forbidden(rel: Path, rule: str) -> bool:
     normalized = rel.as_posix()
+    if rule.startswith("*."):
+        return rel.name.endswith(rule[1:])
     stripped = rule.rstrip("/")
     if rule.endswith("/"):
-        return normalized == stripped or normalized.startswith(stripped + "/")
+        return normalized == stripped or normalized.startswith(stripped + "/") or stripped in rel.parts
     return rel.name == rule or normalized == rule
 
 
